@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import TextField, { Input } from '@material/react-text-field';
 import MaterialIcon from '@material/react-material-icon';
@@ -12,21 +12,7 @@ const Home = () => {
 
   const [value, setValue] = useState('');
   const [open, setOpen] = useState(false);
-  const [lat, setLat] = useState('-21.762373');
-  const [long, setLong] = useState('-43.354102');
   const { restaurants = [] } = useSelector((state) => state.restaurants);
-
-  useEffect(() => {
-    function getPosition() {
-      if ('geolocation' in navigator) {
-        window.navigator.geolocation.getCurrentPosition((position) => {
-          setLat(position.coords.latitude);
-          setLong(position.coords.longitude);
-        });
-      }
-    }
-    getPosition();
-  });
 
   const settings = {
     dots: false,
@@ -51,8 +37,8 @@ const Home = () => {
           </TextField>
           <Title size="large">Na sua Área</Title>
           <Carousel {...settings}>
-          {restaurants.map((restaurant) => (
-              <Card photo={restaurant.photos[0].getUrl()}>
+            {restaurants.map((restaurant) => (
+              <Card photo={restaurant.photos ? restaurant.photos[0].getUrl() : restaurant.icon}>
                 <Text size="medium" color="#ffffff">
                   {restaurant.name}
                 </Text>
@@ -66,15 +52,15 @@ const Home = () => {
               rating={restaurant.rating}
               title={restaurant.name}
               address={restaurant.vicinity}
-              photo={restaurant.photos[0].getUrl()}
+              photo={restaurant.photos ? restaurant.photos[0].getUrl() : restaurant.icon}
               onClick={() => setOpen(true)}
             />
           ))}
         <Modal open={open} onClose={() => setOpen(false)}>
-        cliquei
-      </Modal>
+          cliquei
+        </Modal>
       </Container>
-      <Map initialCenter={{ lat, lng: long }} />
+      <Map />
     </Wrapper>
   );
 };
