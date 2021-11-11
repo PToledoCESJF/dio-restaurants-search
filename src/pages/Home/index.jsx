@@ -1,17 +1,37 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import TextField, { Input } from '@material/react-text-field';
 import MaterialIcon from '@material/react-material-icon';
 
-import { Text, RestaurantCard, Modal } from '../../components';
+import { Text, RestaurantCard, Modal, Map } from '../../components';
 import logo from '../../assets/logo.svg';
 import photo from '../../assets/restaurante-fake.png';
 
-import { Container, Search, Logo, Card, Title, Carousel } from './styles';
+import { Container, Search, Logo, Card, Title, Carousel, Wrapper } from './styles';
 
 const Home = () => {
 
-  const [value, setValue] = React.useState('');
-  const [open, setOpen] = React.useState(false);
+  const [value, setValue] = useState('');
+  const [open, setOpen] = useState(false);
+  const [lat, setLat] = useState();
+  const [long, setLong] = useState();
+
+  useEffect(() => {
+    function getPosition() {
+      if ('geolocation' in navigator) {
+        window.navigator.geolocation.getCurrentPosition(
+          (position) => {
+            setLat(position.coords.latitude);
+            setLong(position.coords.longitude);
+          },
+          () => {
+            setLat('-21.762373');
+            setLong('-43.354102');
+          }
+        );
+      }
+    }
+    getPosition();
+  });
 
   const settings = {
     dots: false,
@@ -24,6 +44,7 @@ const Home = () => {
   };
 
   return (
+    <Wrapper>
     <Container>
       <Search>
         <Logo src={logo} alt="logo da empresa" />
@@ -75,10 +96,12 @@ const Home = () => {
         photo={photo}
         onClick={() => setOpen(true)}
       />
-      <Modal open={open} onClose={() => setOpen(false)}>
+      {/* <Modal open={open} onClose={() => setOpen(false)}>
         cliquei
-      </Modal>
+      </Modal> */}
     </Container>
+    <Map initialCenter={{ lat, lng: long }} />
+    </Wrapper>
   );
 };
 export default Home;
