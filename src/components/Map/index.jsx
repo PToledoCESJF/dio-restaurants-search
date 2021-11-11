@@ -87,7 +87,9 @@ export const MapContainer = (props) => {
     <Map
       google={google}
       centerAroundCurrentLocation
+      // eslint-disable-next-line react/jsx-no-bind
       onReady={onMapReady}
+      // eslint-disable-next-line react/jsx-no-bind
       onRecenter={onMapReady}
       zoom={15}
       {...props}>

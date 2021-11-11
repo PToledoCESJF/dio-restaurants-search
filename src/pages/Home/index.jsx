@@ -37,14 +37,14 @@ const Home = () => {
   const renderCarousel = () => {
     if (hasRestaurants) {
       return (
-        <React.Fragment>
+        <>
           <Title size="large">Na sua Área</Title>
           <Carousel {...settings}>
             {restaurants.map((restaurant) => (
               <ImageCard key={restaurant.place_id} restaurant={restaurant} />
             ))}
           </Carousel>
-        </React.Fragment>
+        </>
       );
     }
     return <Loader />;
@@ -92,23 +92,23 @@ const Home = () => {
         {renderRestaurants()}
         <Modal open={open} onClose={() => setOpen(false)}>
           {restaurantSelected ? (
-            <React.Fragment>
-              <Text size="large">{restaurantSelected.name}</Text>
-              <Text size="medium">{restaurantSelected.formatted_phone_number}</Text>
-              <Text size="medium">{restaurantSelected.formatted_address}</Text>
+            <>
+              <Text size="large">{restaurantSelected?.name}</Text>
+              <Text size="medium">{restaurantSelected?.formatted_phone_number}</Text>
+              <Text size="medium">{restaurantSelected?.formatted_address}</Text>
               <Text size="medium">
-                {restaurantSelected.opening_hours.open_now
+                {restaurantSelected?.opening_hours?.open_now
                   ? 'Aberto agora :)'
                   : 'Fechado neste momento :('}
               </Text>
-            </React.Fragment>
+            </>
           ) : (
-            <React.Fragment>
+            <>
               <Skeleton width="10px" height="10px" />
               <Skeleton width="10px" height="10px" />
               <Skeleton width="10px" height="10px" />
               <Skeleton width="10px" height="10px" />
-            </React.Fragment>
+            </>
           )}
         </Modal>
       </Container>

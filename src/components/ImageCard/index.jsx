@@ -28,7 +28,7 @@ export default ({ restaurant }) => {
   }, [image]);
 
   return (
-    <React.Fragment>
+    <>
       {imageLoaded ? (
         <Card photo={image}>
           <Text size="medium" color="#ffffff">
@@ -38,6 +38,6 @@ export default ({ restaurant }) => {
       ) : (
         <ImageSkeleton width="90px" height="90px" />
       )}
-    </React.Fragment>
+    </>
   );
 };

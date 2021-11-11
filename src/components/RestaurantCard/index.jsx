@@ -5,7 +5,7 @@ import { Restaurant, RestaurantInfo, Content, RestaurantPhoto } from './styles';
 import Text from '../Text';
 import ImageSkeleton from '../ImageSkeleton';
 
-const ResturantCard = ({ restaurant, onClick }) => {
+const RestaurantCard = ({ restaurant, onClick }) => {
   const [imageLoaded, setImageLoaded] = useState(false);
 
   return (
@@ -26,4 +26,4 @@ const ResturantCard = ({ restaurant, onClick }) => {
   );
 };
 
-export default ResturantCard;
+export default RestaurantCard;

@@ -27,7 +27,9 @@ const Modal = ({ children, open, onClose }) => {
 
   return (
     <Portal>
+      {/* eslint-disable-next-line react/jsx-no-bind */}
       <Overlay onClick={onOverlayClick}>
+        {/* eslint-disable-next-line react/jsx-no-bind */}
         <Dialog onClick={onDialogClick}>{children}</Dialog>
       </Overlay>
     </Portal>
