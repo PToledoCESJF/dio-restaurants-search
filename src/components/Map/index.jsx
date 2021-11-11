@@ -80,10 +80,12 @@ export const MapContainer = (props) => {
 
   function onMapReady(_, map) {
     setMap(map);
+    searchNearby(map, map.center);
   }
 
   return (
-    <Map google={google}
+    <Map
+      google={google}
       centerAroundCurrentLocation
       onReady={onMapReady}
       onRecenter={onMapReady}

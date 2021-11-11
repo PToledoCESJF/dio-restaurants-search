@@ -11,6 +11,7 @@ const BaseText = styled.p`
   font-weight: normal;
   color: ${({ color, theme: { colors } }) => color || colors.text};
   text-transform: ${({ textStyle }) => textStyle || 'none'};
+
   ${({ size }) => size === 'large' && TextLarge};
   ${({ size }) => size === 'medium' && TextMedium};
 `;

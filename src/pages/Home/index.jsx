@@ -14,13 +14,12 @@ import {
   ImageSkeleton as Skeleton,
 } from '../../components';
 import logo from '../../assets/logo.svg';
-
 import { Container, Search, Logo, Title, Carousel, Wrapper } from './styles';
 
 const Home = () => {
-
   const [value, setValue] = useState('');
   const [query, setQuery] = useState('');
+  const [placeId, setPlaceId] = useState(null);
   const [open, setOpen] = useState(false);
   const { restaurants, restaurantSelected } = useSelector((state) => state.restaurants);
   const hasRestaurants = restaurants.length > 0;
@@ -92,7 +91,7 @@ const Home = () => {
         </Search>
         {renderRestaurants()}
         <Modal open={open} onClose={() => setOpen(false)}>
-        {restaurantSelected ? (
+          {restaurantSelected ? (
             <React.Fragment>
               <Text size="large">{restaurantSelected.name}</Text>
               <Text size="medium">{restaurantSelected.formatted_phone_number}</Text>
@@ -117,4 +116,5 @@ const Home = () => {
     </Wrapper>
   );
 };
+
 export default Home;
