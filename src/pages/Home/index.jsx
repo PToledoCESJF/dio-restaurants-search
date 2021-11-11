@@ -11,6 +11,7 @@ import { Container, Search, Logo, Title, Carousel, Wrapper } from './styles';
 const Home = () => {
 
   const [value, setValue] = useState('');
+  const [query, setQuery] = useState('');
   const [open, setOpen] = useState(false);
   const { restaurants } = useSelector((state) => state.restaurants);
   const hasRestaurants = restaurants.length > 0;
@@ -32,7 +33,7 @@ const Home = () => {
           <Title size="large">Na sua Área</Title>
           <Carousel {...settings}>
             {restaurants.map((restaurant) => (
-              <ImageCard restaurant={restaurant} />
+              <ImageCard key={restaurant.place_id} restaurant={restaurant} />
             ))}
           </Carousel>
         </React.Fragment>
@@ -54,6 +55,16 @@ const Home = () => {
     return null;
   };
 
+  const handleChange = (e) => {
+    setValue(e.target.value);
+  };
+
+  const handleKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      setQuery(value);
+    }
+  };
+
   return (
     <Wrapper>
       <Container>
@@ -63,7 +74,7 @@ const Home = () => {
             outlined
             label="Pesquisar"
             trailingIcon={<MaterialIcon role="button" icon="search" />}>
-            <Input type="text" value={value} onChange={(e) => setValue(e.target.value)} />
+            <Input type="text" value={value} onKeyPress={handleKeyPress} onChange={handleChange} />
           </TextField>
           {renderCarousel()}
         </Search>
@@ -72,7 +83,7 @@ const Home = () => {
           cliquei
         </Modal>
       </Container>
-      <Map />
+      <Map query={query} />
     </Wrapper>
   );
 };
