@@ -2,7 +2,7 @@ import React from 'react';
 import TextField, { Input } from '@material/react-text-field';
 import MaterialIcon from '@material/react-material-icon';
 
-import { Text, RestaurantCard } from '../../components';
+import { Text, RestaurantCard, Modal } from '../../components';
 import logo from '../../assets/logo.svg';
 import photo from '../../assets/restaurante-fake.png';
 
@@ -11,6 +11,7 @@ import { Container, Search, Logo, Card, Title, Carousel } from './styles';
 const Home = () => {
 
   const [value, setValue] = React.useState('');
+  const [open, setOpen] = React.useState(false);
 
   const settings = {
     dots: false,
@@ -72,7 +73,11 @@ const Home = () => {
         address="Rua de alguma coisa"
         opened="Aberto até as 23h"
         photo={photo}
+        onClick={() => setOpen(true)}
       />
+      <Modal open={open} onClose={() => setOpen(false)}>
+        cliquei
+      </Modal>
     </Container>
   );
 };
